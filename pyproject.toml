@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sclambda"
+dynamic = ["version"]
+description = "Single-cell and spatial annotation with a shared statistical engine, Python pipelines, and agent skills"
+requires-python = ">=3.10,<3.13"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "LAMBDA Team"}]
+dependencies = [
+    "numpy>=1.24", "pandas>=2.0", "scipy>=1.10", "anndata>=0.11",
+    "scanpy>=1.10", "statsmodels>=0.14", "scikit-learn>=1.3",
+    "h5py>=3.8", "matplotlib>=3.7", "pyarrow>=12.0", "igraph>=0.11",
+    # umap-learn 0.6.0 rejects the neighbour distances scanpy 1.12 passes it
+    # (numba TypingError in sc.pp.neighbors above ~4k cells).
+    "umap-learn<0.6",
+    # scanpy <1.12 (the newest on Python 3.10) calls csr.getnnz on
+    # pynndescent 0.7 output, which returns csr_array without it.
+    "pynndescent<0.7; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+# Provider extras include the pipeline runtime; the base engine imports neither.
+llm = ["langgraph>=0.2", "langchain-core>=0.3"]
+openai = ["sclambda[llm]", "langchain-openai>=0.2"]
+anthropic = ["sclambda[llm]", "langchain-anthropic>=0.2"]
+google = ["sclambda[llm]", "langchain-google-genai>=2.0"]
+providers = ["sclambda[openai,anthropic,google]"]
+excel = ["openpyxl>=3.1"]
+color = ["colorcet>=3.0"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "build>=1.0", "ruff>=0.1"]
+test = ["pytest>=7.4", "pytest-cov>=4.1"]
+jupyter = ["jupyterlab>=4.0", "ipykernel>=6.25"]
+all = ["sclambda[providers,excel,color,dev,jupyter]"]
+
+[project.scripts]
+lambdakit = "sclambda.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "sclambda._version.__version__"}
+
+[tool.setuptools.package-data]
+sclambda = ["pipelines/*/prompts/*.md"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = ["integration: live provider API calls; opt in with --run-integration"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

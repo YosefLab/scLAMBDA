@@ -1,0 +1,17 @@
+{
+  "description": "Auto-approves the plugin's own non-destructive `lambdakit` engine calls so an annotation run does not raise a permission prompt for every measurement. Commands that delete data (clean, cache rm) are excluded and still prompt, as is anything containing shell metacharacters.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/allow_lambdakit.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

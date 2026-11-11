@@ -1,0 +1,28 @@
+{
+  "name": "lambda-annotate",
+  "owner": {
+    "name": "Artemii Bakulin",
+    "url": "https://github.com/artemy-bakulin"
+  },
+  "metadata": {
+    "description": "Cell-type and spatial-niche annotation for single-cell and spatial transcriptomics, running entirely in Claude Code with no API key.",
+    "version": "0.3.1"
+  },
+  "plugins": [
+    {
+      "name": "lambda-annotate",
+      "source": "./",
+      "description": "Annotate cell types and spatial niches in .h5ad datasets. An actor-critic dossier loop reasons over differential expression, cell-type composition and rendered section images; the statistics run locally in the bundled lambdakit engine. No API key required.",
+      "version": "0.3.1",
+      "keywords": [
+        "single-cell",
+        "scRNA-seq",
+        "spatial-transcriptomics",
+        "annotation",
+        "bioinformatics",
+        "anndata",
+        "scanpy"
+      ]
+    }
+  ]
+}

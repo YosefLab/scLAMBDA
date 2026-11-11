@@ -1,0 +1,2 @@
+# Install the shared engine; choose a provider extra for API workflows.
+-e .

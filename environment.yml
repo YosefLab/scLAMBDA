@@ -1,0 +1,9 @@
+name: sclambda
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10,<3.13
+  - pip
+  - pip:
+      # Dependencies are declared once, in pyproject.toml.
+      - -e .[providers,excel,dev]

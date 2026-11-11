@@ -1,0 +1,11 @@
+include README.md LICENSE pyproject.toml setup.py
+recursive-include src/sclambda/pipelines *.md
+recursive-include skills *.md
+recursive-include hooks *.json *.sh
+recursive-include .claude-plugin *.json
+include bin/lambdakit
+recursive-include docs *.md
+recursive-include scripts *.py
+include requirements*.txt
+recursive-include tests *.py
+recursive-include examples *.py

@@ -1,0 +1,16 @@
+{
+  "name": "lambda-annotate",
+  "description": "Cell-type and spatial-niche annotation for single-cell and spatial transcriptomics. Reasons over differential expression, composition and rendered section images through an actor-critic dossier loop; the statistics run locally in the bundled lambdakit engine. No API key required.",
+  "version": "0.3.1",
+  "author": {
+    "name": "sc-lambda"
+  },
+  "keywords": [
+    "single-cell",
+    "scRNA-seq",
+    "spatial-transcriptomics",
+    "annotation",
+    "bioinformatics",
+    "anndata"
+  ]
+}

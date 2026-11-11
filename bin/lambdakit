@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Works from a checkout and from the plugin included in a Python wheel.
+set -euo pipefail
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PYTHONPATH="$here/../src${PYTHONPATH:+:$PYTHONPATH}"
+exec "${LAMBDAKIT_PYTHON:-python3}" -m sclambda.cli "$@"
